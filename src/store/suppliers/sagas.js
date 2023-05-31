@@ -27,6 +27,20 @@ export function* registerSupplierRequest(action) {
   }
 }
 
+export function* getSupplierByIdRequest(action) {
+  try {
+    const { data } = yield call(
+      Api.get,
+      `/clientefornecedor/${action.payload.id}`
+    );
+
+
+    // yield put(getSupplierListSuccess(data));
+  } catch (error) {
+    // yield put(getSupplierListFailure(error));
+  }
+}
+
 export function* getSupplierListRequest() {
   try {
     const { data } = yield call(Api.get, "/clientefornecedor/all");

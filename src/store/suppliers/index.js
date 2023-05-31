@@ -13,6 +13,12 @@ const INITIAL_STATE = {
     error: false,
     data: [],
   },
+  supplierById: {
+    loading: false,
+    success: false,
+    error: false,
+    data: {},
+  },
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -45,6 +51,45 @@ const reducer = (state = INITIAL_STATE, action) => {
           success: false,
           loading: false,
           error: true,
+        },
+      };
+
+    case suppliersTypes.GET_SUPPLIER_BY_ID_REQUEST:
+      return {
+        ...state,
+        supplierById: {
+          loading: true,
+          success: false,
+          error: false,
+        },
+      };
+    case suppliersTypes.GET_SUPPLIER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        supplierById: {
+          ...state.supplierById,
+          data: action.payload.data,
+          success: true,
+          loading: false,
+          error: false,
+        },
+      };
+    case suppliersTypes.GET_SUPPLIER_BY_ID_FAILURE:
+      return {
+        ...state,
+        supplierById: {
+          ...state.supplierById,
+          success: false,
+          loading: false,
+          error: true,
+        },
+      };
+
+    case suppliersTypes.GET_SUPPLIER_BY_ID_CLEAN:
+      return {
+        ...state,
+        supplierById: {
+          ...INITIAL_STATE.supplierById
         },
       };
 

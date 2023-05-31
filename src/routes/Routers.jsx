@@ -3,14 +3,18 @@ import Home from "pages/Home/Home";
 import RegisterOrder from "pages/RegisterOrder/RegisterOrder";
 import Toast from "components/toast/Toast";
 import OrderKanbanList from "components/orderKanbanList/orderKanbanList";
-import RegisterSupplier from "pages/RegisterSupplier/RegisterSupplier";
+import FormSupplier from "components/FormSupplier/FormSupplier";
 
 const Routers = () => (
   <>
     <Routes>
       <Route path={"/"} element={<Home />} />
       <Route path={"/cadastro-pedido"} element={<RegisterOrder />} />
-      <Route path={"/cadastro-fornecedor"} element={<RegisterSupplier />} />
+      <Route path={"/cadastro-fornecedor"} element={<FormSupplier />} />
+      <Route
+        path={"/editar-fornecedor/:id"}
+        element={<FormSupplier editMode />}
+      />
       <Route path={"/pedidos"} element={<OrderKanbanList />} />
     </Routes>
     <Toast />

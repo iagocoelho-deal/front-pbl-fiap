@@ -1,36 +1,58 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Form, Row, Col, FloatingLabel } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Form, Row, Col } from "react-bootstrap";
 import { MainContainer } from "components/container/MainContainer";
 import { connect } from "react-redux";
 import * as suppliersActions from "store/suppliers/actions";
 import { UF } from "Util/variables";
 import Header from "components/header/Header";
-import "./registerSupplier.scss";
+import { useLocation } from "react-router-dom";
+import "./formSupplier.scss";
 
-export const RegisterSupplier = ({
+export const FormSupplier = ({
   registerState,
   registerSupplierRequest,
+  getSupplierByIdRequest,
+  getSupplierListClean,
+  editMode,
 }) => {
+  debugger
+  // const { pathname } = useLocation();
+
+  useEffect(() => {
+    console.log("teste");
+  }, []);
+
+  // useEffect(() => {
+  //   if (editMode) {
+  //     return getSupplierByIdRequest(pathname.split("/editar-fornecedor/")[1]);
+  //   }
+
+  //   return () => {
+  //     getSupplierListClean();
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [getSupplierByIdRequest, getSupplierListClean]);
+
   const [data, setData] = useState({
-    nome: "João",
-    documento: "12345678910",
-    emails: "luiz@luiz.com.br",
+    nome: "",
+    documento: "",
+    emails: "",
     telefones: [
       {
-        tipo: "CELULAR",
-        numero: "11952366025",
+        tipo: "",
+        numero: "",
       },
       {
-        tipo: "COMERCIAL",
-        numero: "1127012000",
+        tipo: "",
+        numero: "",
       },
     ],
     endereco: {
-      logradouro: "Rua asçljlçksalçjskfad",
-      numero: "229",
-      bairro: "jardim das flores",
-      estado: "SP",
-      cep: "18207006",
+      logradouro: "",
+      numero: "",
+      bairro: "",
+      estado: "",
+      cep: "",
     },
   });
 
@@ -273,7 +295,13 @@ const mapDispatchToProps = (dispatch) => {
     registerSupplierRequest: (data) => {
       dispatch(suppliersActions.registerSupplierRequest(data));
     },
+    getSupplierByIdRequest: (id) => {
+      dispatch(suppliersActions.getSupplierByIdRequest(id));
+    },
+    getSupplierListClean: () => {
+      dispatch(suppliersActions.getSupplierListClean());
+    },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterSupplier);
+export default connect(mapStateToProps, mapDispatchToProps)(FormSupplier);

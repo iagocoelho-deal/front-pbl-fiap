@@ -4,7 +4,8 @@ import { all, takeLatest } from "redux-saga/effects";
 import {
   registerSupplierRequest,
   getSupplierListRequest,
-  deleteSupplierRequest
+  deleteSupplierRequest,
+  getSupplierByIdRequest,
 } from "./suppliers/sagas";
 import { suppliersTypes } from "./suppliers/types";
 
@@ -18,9 +19,10 @@ export default function* rootSaga() {
       suppliersTypes.GET_SUPPLIER_LIST_REQUEST,
       getSupplierListRequest
     ),
+    takeLatest(suppliersTypes.DELETE_SUPPLIER_REQUEST, deleteSupplierRequest),
     takeLatest(
-      suppliersTypes.DELETE_SUPPLIER_REQUEST,
-      deleteSupplierRequest
+      suppliersTypes.GET_SUPPLIER_BY_ID_REQUEST,
+      getSupplierByIdRequest
     ),
   ]);
 }
